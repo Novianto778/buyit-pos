@@ -180,14 +180,23 @@ const OrderList = () => {
                     {
                         Header: 'Product Name',
                         accessor: 'name',
+                        Cell: ({ values }) => {
+                            return <span className="text-xs">{values}</span>;
+                        },
                     },
                     {
                         Header: 'Price',
                         accessor: 'price',
+                        Cell: ({ values }) => {
+                            return <span className="text-xs">{values}</span>;
+                        },
                     },
                     {
                         Header: 'Quantity',
                         accessor: 'quantity',
+                        Cell: ({ values }) => {
+                            return <span className="text-xs text-center">{values}</span>;
+                        },
                     },
                     {
                         Header: 'Subtotal',

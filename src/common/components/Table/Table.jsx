@@ -96,6 +96,7 @@ function Table({
         {
             columns,
             data,
+            // manualPagination: true,
         },
         useFilters,
         useGlobalFilter,

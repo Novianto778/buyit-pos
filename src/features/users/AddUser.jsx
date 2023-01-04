@@ -47,9 +47,9 @@ const AddUser = ({ isEdit }) => {
 
     useEffect(() => {
         if (isEdit) {
-            if (!data?.username && !isLoading) {
-                navigate('/404');
-            }
+            // if (!data?.username && !isLoading) {
+            //     navigate('/404');
+            // }
             setValue('username', data?.username);
             setValue('password', '********');
             setValue(

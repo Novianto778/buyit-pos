@@ -24,10 +24,8 @@ const PersistLogin = () => {
         };
 
         !user?.accessToken ? verifyRefreshToken() : setIsLoading(false);
-        return () => {
-            isMounted = false;
-        };
-    }, [user?.accessToken, refresh]);
+        return () => (isMounted = false);
+    }, []);
 
     // kalo tidak persist maka langsung akan ke outlet tanpa jalanin useEffect(maka gk ada cek refresh)
     return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;

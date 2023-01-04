@@ -5,7 +5,7 @@ import useAuthApi from '../../api/authApi';
 import useUserStore from '../../store/userStore';
 
 export const useLogin = () => {
-    const { setUser } = useUserStore();
+    const setUser = useUserStore((state) => state.setUser);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || '/dashboard';
@@ -27,7 +27,7 @@ export const useLogin = () => {
 
 export const useLogout = () => {
     const queryClient = useQueryClient();
-    const { setUser } = useUserStore();
+    const setUser = useUserStore((state) => state.setUser);
     const { logout } = useAuthApi();
 
     return useMutation(logout, {

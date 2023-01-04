@@ -83,13 +83,8 @@ function App() {
                             </Route>
                         </Route>
                     </Route>
-                    <Route
-                        path="/login"
-                        element={
-                            user ? <Navigate to={'/dashboard'} /> : <Login />
-                        }
-                    />
                 </Route>
+                <Route path="/login" element={<Login />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

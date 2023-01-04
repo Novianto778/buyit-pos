@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            retry: false,
+            retry: 0,
             refetchOnWindowFocus: false,
             // refetchOnMount: false,
             staleTime: 5 * 60 * 1000,
@@ -19,11 +19,11 @@ const queryClient = new QueryClient({
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </QueryClientProvider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </QueryClientProvider>
+    // </React.StrictMode>
 );

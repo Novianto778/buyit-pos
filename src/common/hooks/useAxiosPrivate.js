@@ -5,7 +5,7 @@ import useUserStore from '../../store/userStore';
 
 const useAxiosPrivate = () => {
     const refresh = useRefreshToken();
-    const { user } = useUserStore();
+    const user = useUserStore((state) => state.user);
 
     useEffect(() => {
         const requestInterceptor = axiosPrivate.interceptors.request.use(
@@ -22,16 +22,16 @@ const useAxiosPrivate = () => {
 
         const responseIntercept = axiosPrivate.interceptors.response.use(
             (response) => {
-                // console.log('response interceptor', response);
                 return response;
             },
             async (error) => {
                 const prevRequest = error?.config;
+                console.log(prevRequest);
+
                 if (error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true;
                     const newAccessToken = await refresh();
                     console.log('nACT', newAccessToken);
-
                     prevRequest.headers = {
                         ...prevRequest.headers,
                         Authorization: `Bearer ${newAccessToken}`,
