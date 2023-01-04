@@ -72,6 +72,7 @@ function Table({
     renderRowSubComponent = null,
     isSub,
     renderTableFooter,
+    manualPagination,
 }) {
     const {
         getTableProps,
@@ -96,7 +97,7 @@ function Table({
         {
             columns,
             data,
-            // manualPagination: true,
+            manualPagination,
         },
         useFilters,
         useGlobalFilter,

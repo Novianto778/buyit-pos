@@ -5,8 +5,8 @@ export default axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    baseURL: 'https://buyit.up.railway.app/',
-    // baseURL: 'http://localhost:3500/',
+    // baseURL: 'https://buyit.up.railway.app/',
+    baseURL: 'http://localhost:3500/',
 });
 
 const axiosPrivate = axios.create({
@@ -14,8 +14,8 @@ const axiosPrivate = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    baseURL: 'https://buyit.up.railway.app/',
-    // baseURL: 'http://localhost:3500/',
+    // baseURL: 'https://buyit.up.railway.app/',
+    baseURL: 'http://localhost:3500/',
 });
 
 export { axiosPrivate };

@@ -1,13 +1,14 @@
 import Table from 'common/components/Table/Table';
 import { SelectColumnFilter } from 'common/components/Table/Table';
 import useLoading from 'common/hooks/useLoading';
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useOrders } from './queries';
 import Receipt from './Receipt';
 import ReactToPrint from 'react-to-print';
 import { useExportExcel } from './hooks/useExportExcel';
 import { useProducts } from 'features/products/queries';
 import Button from 'common/components/Button';
+// import Pagination from 'common/components/Table/Pagination';
 
 const IndeterminateCheckbox = React.forwardRef(
     ({ indeterminate, ...rest }, ref) => {
@@ -27,9 +28,27 @@ const IndeterminateCheckbox = React.forwardRef(
 );
 
 const OrderList = () => {
-    const { data, isLoading } = useOrders();
+    // const [state, setState] = React.useState({
+    //     total: 0,
+    //     limit: 10,
+    //     page: 1,
+    //     pages: 1,
+    // });
+    const { data, isLoading, isError, error } = useOrders();
     const { exportExcel } = useExportExcel();
     const { data: products } = useProducts();
+
+    // useEffect(() => {
+    //     if (data) {
+    //         setState((prevState) => ({
+    //             ...prevState,
+    //             total: Number(data?.pagination.total),
+    //             limit: Number(data?.pagination.limit),
+    //             page: Number(data?.pagination.page),
+    //             pages: Number(data?.pagination.pages),
+    //         }));
+    //     }
+    // }, [data]);
 
     const productsOptions = useMemo(
         () =>
@@ -180,22 +199,26 @@ const OrderList = () => {
                     {
                         Header: 'Product Name',
                         accessor: 'name',
-                        Cell: ({ values }) => {
-                            return <span className="text-xs">{values}</span>;
+                        Cell: ({ value }) => {
+                            return <span className="text-xs">{value}</span>;
                         },
                     },
                     {
                         Header: 'Price',
                         accessor: 'price',
-                        Cell: ({ values }) => {
-                            return <span className="text-xs">{values}</span>;
+                        Cell: ({ value }) => {
+                            return <span className="text-xs">{value}</span>;
                         },
                     },
                     {
                         Header: 'Quantity',
                         accessor: 'quantity',
-                        Cell: ({ values }) => {
-                            return <span className="text-xs text-center">{values}</span>;
+                        Cell: ({ value }) => {
+                            return (
+                                <span className="text-xs text-center">
+                                    {value}
+                                </span>
+                            );
                         },
                     },
                     {
@@ -238,7 +261,9 @@ const OrderList = () => {
     useLoading(isLoading);
 
     if (isLoading) return <div>Loading...</div>;
-    if (!data.orders) return <div>There is no data</div>;
+    // if (!data?.orders) return <div>There is no data</div>;
+
+    if (isError) return <div>{error.message}</div>;
 
     return (
         <>
@@ -255,7 +280,9 @@ const OrderList = () => {
                 columns={columns}
                 renderRowSubComponent={renderRowSubComponent}
                 renderTableFooter={renderTableFooter}
+                // manualPagination
             />
+            {/* <Pagination state={state} setState={setState} /> */}
         </>
     );
 };

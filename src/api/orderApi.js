@@ -4,11 +4,20 @@ const useOrderAPI = () => {
     const axiosPrivate = useAxiosPrivate();
 
     const getOrders = async () => {
+        // with page and limit
+        // const { page = 1, limit = 10 } = queryKey[1];
+        // const url = `/orders?page=${page}&limit=${limit}`;
+
+        // without page and limit
+        const url = '/orders';
+
         try {
-            const { data } = await axiosPrivate.get('/orders');
-            return data;
+            const res = await axiosPrivate.get(url);
+            if (res.status === 200) {
+                return res.data;
+            }
         } catch (error) {
-            return error;
+            throw new Error(error?.response?.data?.message);
         }
     };
 
@@ -19,8 +28,7 @@ const useOrderAPI = () => {
                 return res.data;
             }
         } catch (error) {
-            console.log(error);
-            return error;
+            throw new Error(error?.response?.data?.message);
         }
     };
 

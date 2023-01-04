@@ -7,7 +7,7 @@ const ReceiptItem = ({ product }) => {
         <div className="grid grid-cols-12">
             <div className="flex items-center gap-x-6 col-span-6">
                 <img
-                    src={`${axios.defaults.baseURL}/files/${product.productId.image}`}
+                    src={`${axios.defaults.baseURL}files/${product.productId.image}`}
                     alt=""
                     className="w-20 h-20"
                 />
