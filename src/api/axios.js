@@ -5,7 +5,7 @@ export default axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    // baseURL: 'https://buyit.up.railway.app/',
+    baseURL: 'https://buyit.up.railway.app/',
     // baseURL: 'http://localhost:3500/',
 });
 
